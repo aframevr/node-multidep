@@ -95,16 +95,16 @@ module.exports.install = function(specPath) {
               }
 
               var npmCommand = 'npm';
+              var npmArgs = ['install', installName];
               if (process.env.MULTIDEP_NPM_PATH) {
-                var npmCommand = 'node ' + process.env.MULTIDEP_NPM_PATH;
+                npmCommand = 'node';
+                npmArgs.unshift(process.env.MULTIDEP_NPM_PATH);
               }
-              var memoryLimitArg = '';
               if (process.env.MULTIDEP_MEMORY_LIMIT) {
-                var memoryLimitArg = '--max-old-space-size=' +
-                                     process.env.MULTIDEP_MEMORY_LIMIT;
+                npmArgs.push('--max-old-space-size=' + process.env.MULTIDEP_MEMORY_LIMIT);
               }
 
-              var cp = spawn('npm', ['install', installName, memoryLimitArg], {
+              var cp = spawn(npmCommand, npmArgs, {
                 cwd: packagePath,
                 stdio: 'inherit',
                 timeout: 300
