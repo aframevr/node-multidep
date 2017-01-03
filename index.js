@@ -104,6 +104,7 @@ module.exports.install = function(specPath) {
                 npmArgs.push('--max-old-space-size=' + process.env.MULTIDEP_MEMORY_LIMIT);
               }
 
+              console.log(npmCommand, npmArgs);
               var cp = spawn(npmCommand, npmArgs, {
                 cwd: packagePath,
                 stdio: 'inherit',
