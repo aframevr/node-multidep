@@ -108,7 +108,7 @@ module.exports.install = function(specPath) {
               var cp = spawn(npmCommand, npmArgs, {
                 cwd: packagePath,
                 stdio: 'inherit',
-                timeout: 300
+                timeout: 300000
               })
               return new RSVP.Promise(function(resolve, reject) {
                 cp.on('exit', function(code, signal) {
